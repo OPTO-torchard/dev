@@ -35,8 +35,8 @@ for i in range(up-lo):
     retBytes.append(data[up-1-i])
 result = str(struct.unpack_from('i', bytearray(retBytes)))
 if (int(result[1:-2]) == 0):
-    print 'Write success'
+    print 'Write success ' + result
 else:
-    print 'Write failure.'
+    print 'Write failure ' + result
 #close the socket:
 s.close()
