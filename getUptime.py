@@ -10,7 +10,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((host, port))
 ## build uptime block request:                F0  30  01  0C    <- uptime memory location
 ## [_,_, tlabel_, tc_, src,src, Dest,Dest,   D.4,D.3,D.2,D.1,   len,len, ext.tc,ext.tc]
-myBytes = [0, 0, 1, 80,  0,  0,  255, 255,   240, 48,  1, 12,     0, 16, 0,0]
+myBytes = [0, 0, 4, 80,  0,  0,  255, 255,   240, 48,  1, 12,     0, 4, 0,0]
 ## send request and save the response
 nSent = s.send(bytearray(myBytes))
 data = s.recv(20)
