@@ -1,9 +1,10 @@
 import sys
 import socket
 import struct
-#host = '10.192.58.10' # SNAP PAC Learning Center
-#host = '10.192.0.201' # groov EPIC
-host = sys.argv[1]
+if len(sys.argv) < 2:   # if an arguement isn't included
+    host = 'localhost'  # default to localhost
+else:
+    host = sys.argv[1]  # otherwise use the first argument
 
 port = 2001
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
