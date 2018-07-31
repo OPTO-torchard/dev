@@ -1,8 +1,11 @@
+## use: >> python eRead.py <#> <#>
+##      <#> first argument = module number
+##      <#> second argument = channel number
 import sys
 import socket
 import struct
 
-host = '10.192.0.201' # groov EPIC
+host = '127.0.0.1' # localhost when ran from groov controller command line
 
 port = 2001 #MMP default port: 2001
 tcode = 5   # read block request

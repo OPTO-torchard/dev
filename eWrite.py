@@ -1,8 +1,13 @@
+## use: >> python eWrite.py <#> <#> <1|0>
+##      <#> first argument = module number
+##      <#> second argument = channel number
+##      1|0 third arguement = write value (1 OR 0)
 import sys
 import socket
 import struct
 
-host = '10.192.0.201' # groov EPIC
+host = '127.0.0.1' # localhost when ran from groov controller command line
+
 port = 2001 #MMP default port: 2001
 tcode = 1   # write block request
 modN = int(sys.argv[1]) # first argument / parameter
