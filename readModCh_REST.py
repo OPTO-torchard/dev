@@ -1,3 +1,4 @@
+## python readModCh_REST.py <mod#> <ch#>
 import sys          # to handle argument values
 import requests     # to make get/post requests
 # ignore insecure https requests warning:
@@ -19,6 +20,6 @@ if response.status_code != 200:
     sys.exit()
 # otherwise find the state result in the response text, then output it
 else:
-    start = response.text.index('state') + 7
-    end = response.text.index(',', start)
-    print response.text[start:end]
+    start = response.text.index('state') + 7 # offset 7 letters `state:_`
+    end = response.text.index(',', start)    # after the state, find the next comma
+    print response.text[start:end]           # slice the between `state:_` and `,`

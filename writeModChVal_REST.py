@@ -1,3 +1,4 @@
+## python writeModChVal.py <mod#> <ch#> <1|0>
 import sys          # to handle argument values
 import requests     # to make get/post requests
 # ignore insecure https requests warning:
