@@ -1,0 +1,21 @@
+import sys          # to handle argument values
+import requests     # to make get/post requests
+# ignore insecure https requests warning:
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+# head is a JSON object that holds API key information
+head = {    'apiKey' : 'MDKu7n6PQENni3goRuQjvTQJGD3UBCYp',
+                    'Content-Type' : 'application/json' }
+mod = sys.argv[1] # 1st argument = module number
+chn = sys.argv[2] # 2nd argument = channel number
+# 3rd argument = convert value to be written from 1/0 to true/false
+val = 'true' if(sys.argv[3] == '1') else 'false'
+# construct request URL for the 'local' built-in rack of I/O *state*
+url = 'https://localhost/manage/api/v1/io/local/modules/'+mod+'/channels/'+chn+'/digital/state'
+# data is a JSON object that formats the value for the request
+payload = '{"value":' + val + '}';
+print 'Writing ' + payload + ' to output ' + chn + ' on module ' + mod
+# make the RESTful put request and save the response
+response = requests.put(url, data=payload, headers=head, verify=False)
+if response.status_code == 200: print 'Write success!'
+else: print 'Write request failed.'
