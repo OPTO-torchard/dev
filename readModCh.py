@@ -22,7 +22,7 @@ myBytes = [0, 0, (1 << 2), (tcode << 4), 0, 0, 255, 255, int(str(hex(dest))[2:4]
 
 # send the read block request and save the response:
 nSent = s.send(bytearray(myBytes)) # want nSent to be exactly 16 bytes
-data = s.recv(20) # read block response is 20 bytes
+data = s.recv(24) # read block response is 24 bytes
 data_block = data[16:20] # data_block is in bytes 16-19 for Read Response, stop at 20.
 
 # decode bytearray in big-endian order (>) for integer value (i)

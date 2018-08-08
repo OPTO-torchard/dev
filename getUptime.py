@@ -18,7 +18,7 @@ myBytes = [0, 0, 4, 80,  0,  0,  255, 255,   240, 48,  1, 12,     0, 4, 0,0]
 
 # send request and save the response
 nSent = s.send(bytearray(myBytes)) # want nSent to be exactly 16 bytes
-data = s.recv(20) # read response block is 20 bytes
+data = s.recv(24) # read response block is 24 bytes
 # upper and lower range of the data block in the package:
 data_block = data[16:20] # data_block is bytes 16-19, 20 marks the end point
 # decode bytearray integer value in big-endian order ('>i')
