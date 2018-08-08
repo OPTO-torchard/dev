@@ -1,3 +1,5 @@
+###    getUptime.py >>python getUptime.py OR >>python getUptime.py 127.0.0.1
+
 import sys
 import socket
 import struct
@@ -6,21 +8,22 @@ if len(sys.argv) < 2:   # if an arguement isn't included
 else:
     host = sys.argv[1]  # otherwise use the first argument
 
-port = 2001
+port = 2001 # default OptoMMP port number
+# create socket with IPv4 family, and TCP
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# use that socket connect to host:port tuple
 s.connect((host, port))
-## build uptime block request:                F0  30  01  0C    <- uptime memory location
-## [_,_, tlabel_, tc_, src,src, Dest,Dest,   D.4,D.3,D.2,D.1,   len,len, ext.tc,ext.tc]
+# build uptime block request:                 F0  30  01  0C    <- uptime location in hex
 myBytes = [0, 0, 4, 80,  0,  0,  255, 255,   240, 48,  1, 12,     0, 4, 0,0]
-## send request and save the response
-nSent = s.send(bytearray(myBytes))
-data = s.recv(20)
-up = 20
-lo = 16
-output = []
-## reverse byte order:
-for i in range(up-lo):
-    output.append(data[up-1-i])
-print 'uptime: ' + str(struct.unpack_from('i', bytearray(output)))[1:-2] + 'ms\n'
-## close socket:
+
+# send request and save the response
+nSent = s.send(bytearray(myBytes)) # want nSent to be exactly 16 bytes
+data = s.recv(20) # read response block is 20 bytes
+# upper and lower range of the data block in the package:
+data_block = data[16:20] # data_block is bytes 16-19, 20 marks the end point
+# decode bytearray integer value in big-endian order ('>i')
+output = str(struct.unpack_from('>i', bytearray(data_block)))
+# clip out first `(` and last two characters `,)` append 'ms' and print!
+print 'uptime: ' + output[1:-2] + 'ms'
+# close the socket:
 s.close()
