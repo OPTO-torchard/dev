@@ -27,7 +27,7 @@ Some good outside sources:
 
 [Top](#Top)
 
-## General Use of groov EPIC
+## General Use of _groov_ EPIC
 
 [groov EPIC Training Series](https://training.opto22.com/series/groov-epic-training-series, "training.opto22")
 
@@ -42,50 +42,60 @@ Some good outside sources:
 
 ## Shell access / SSH
 
+A shell license is required to use SSH, you can get one from [Opto 22](https://www.opto22.com/ "opto22.com")
+
 * Opto 22 Training: [Downloading and Running Custom Programs](https://training.opto22.com/series/groov-epic-training-series/downloading-and-running-custom-programs/196374 "training.opto22")<br>
 
-* A shell license is required to use SSH.
+<p>The _groov_ EPIC processor runs a custom build of [Yocto](https://www.yoctoproject.org, "Yocto Project") Linux as it's operating system, this is what you will be interacting with over SSH.<br>
+Experience developing applications from a Unix system command line is extremely helpful here, since there is no traditional user interface (UI) to interact with the operating system, only the _groov_ Manage and _groov_ View interfaces.</p>
 
+Here are a few tasks and associated commands for workign with the command line:
 
+* Navigating:
+    * `pwd` - **print** working directory; Output the full path to the current folder.
+    * `ls` - **list**; Output a list of all files in the current folder.
+        * `ls -a` - **list all**; Output list will also include hidden files.
+        * `ls -l` - **list long**; Output full details of the files.
+        * `ls -la` - **list all long**; Combine flags to display all files and their details.
+    * `cd <dir>` - **change directory**; Moves from the current directory to `dir`.<br>
+    You can give partial and full paths here, so you don't have to jump every single folder individually.<br>
+    Use `..` to go up on folder, `../..` to go up two, and so on.
+* Managing files:
+    * `touch <file>` - **touch**; Creates `file` if it does not exist, and updates the modification time if it does.
+    * `mv <file> <dest>` - **move**; Moves `file` to `dest`, where `dest` can be a single folder or full path.<br>
+        Use this to rename files by putting just the name and no path in `dest`.
+    * `cp <file> <dest>` - **copy**; Copies `file` to `dest`, where the destination can be used to rename the copy.
+    * `rm <file>` - **remove**; Deletes `file` from the current directory, or you can include a full path.
+        * `rm -rf <dir>` - **remove folder**; The addition of the `-rf` flag allows for the removal of entire folders.
+    * `*` - **wildcard**; matches all files in the current directory, or if used mid-file, for example; `rm o*.txt` will delete all text files that begin with the letter 'o'.
+* Editing files:
+    * `nano <file>` - **nano** is a simple command line editor, similar to Notepad it has basic features.
+    * `vim <files>` - **vim** is "**vi** i**m**proved", where vi is a Unix text editor.<br>
+    They both have a higher learning curve than nano, but may be worth using because they have syntax highlighting for most popular languages such as: C++, Python, Java, Javascript, and even Markdown.
+* GitHub:<br>
+    <p>On the topic of managing files and folder structures, many developers choose to manage their source code with GitHub repositories.<br>
+    GitHub is a web-based version control service primarily used for computer code, and is extremely popular due to the way it handles branching of features to develop code without damaging the 'master' release branch. Using GitHub, multiple people can be working on different branches —or contributing to the same branch— then compare their local versions, to the master, and safely merge all the features together, handling conflicts if and when they arse, all while being able to review and restore all previous versions and changes.</p>
+    GitHub not only handles version control but also is a way to have your data backed up in case anything happens to your device. It is recommended to have major programs backed up in three places: an on-site backup, an off-site backup, and a secure (physically isolated or password protected) backup.
 
 [Top](#Top)
 
-## Linux
+-----
 
-The _groov_ EPIC processor runs a custom build of [Yocto](https://www.yoctoproject.org, "Yocto Project") Linux as it's operating system, it is what you will be interacting with over SSH.<br>
-Experience developing applications from a Unix system command line is extremely helpful here, since there is no traditional user interface (UI) to interact with the operating system, only the _groov_ Manage and _groov_ View interfaces (both are described below). 
+## _groov_ Manage, _groov_ View, and PAC Control
 
-
-
-[Top](#Top)
-
-## _groov_ Manage
-
-* Opto 22 Training: [groov Manage - Introduction](https://training.opto22.com/groov-manage-introduction/ "training.opto22")<br>
-
-
+>
 
 [Top](#Top)
+
+-----
 
 ## REST API
-You can make rest requests on the device (localhost) or from elsewhere in the network to access data on the device (via IP or hostname).
+
+Representational State Transfer (REST) is 
+
+You can make RESTful requests on the device (localhost) or from elsewhere in the network to access data on the device (via IP or hostname).
 
 If you want to execute RESTful programs to make requests from the EPIC processor itself you will need a shell license -- but you do not need one to RESTfully access the data from elsewhere in the network.
-
-To make RESTful requests with Python requests you need to:
-
-1. `sudo apt-get update`
-
-    Do **NOT** apt-get upgrade!
-2. `sudo apt-get install python-pip`
-
-    Do **NOT** upgrade pip individually either!
-3. `sudo pip install requests`
-
-4. `import requests`
-
-    Import the library to your script once it is installed
-
 
 
 [Top](#Top)
@@ -96,16 +106,6 @@ OptoMMP is a memory-mapped protocol based on the [IEEE 1394 standard](https://st
 
 * [C++ for OptoMMP](http://developer.opto22.com/cpp "developer.opto22")
 * [Getting Started with OptoMMP for Python](http://developer.opto22.com/pythonmmp/ "developer.opto22")
-
-
-[Top](#Top)
-
-## Node-RED
-
-* Opto 22 Training: [Node-RED - Status, the Editor, Backup and Restore Projects](https://training.opto22.com/series/groov-epic-training-series/node-red-launch-the-editor-view-status-manage-project "training.opto22")<br>
-* [Node-RED](https://nodered.org/ "NodeRED.org")
-    * [Node-Red Flows Library](https://flows.nodered.org/ "flows.NodeRED.org")
-
 
 
 [Top](#Top)
