@@ -9,10 +9,15 @@ Your most powerful tool as a developer is documentation. You will need to regula
 Some of your best Opto resources are:
 
 * [Developer Site](http://developer.opto22.com/ "developer.opto22")
+
 * [Training Site](https://training.opto22.com/ "training.opto22")
+
     * [Workshops](http://workshops.opto22.com/ "workshops.opto22")
+
 * [YouTube Channel](https://www.youtube.com/user/OptoVideo "OptoVideo")
+
 * [Opto22 Support](https://www.opto22.com/support "opto22 support")
+
     * [Resources & Tools](https://www.opto22.com/support/resources-tools "resources & tools")<br>
         Here you can find and filter by documents, downloads, videos, case studies, data sheets, drawings, firmware, images, knowledge base, manuals, pressroom, release notes, software, SKDs and integration kits, white papers, compliance, samples and utilities, and finally demos.
         There are lot of resources available!
@@ -20,8 +25,11 @@ Some of your best Opto resources are:
 Some good outside sources:
 
 * <b>[google](https://google.com/ "google.com")</b>
+
 * [Node-RED](https://nodered.org/ "NodeRED.org")
+
     * [Node-Red Flows Library](https://flows.nodered.org/ "flows.NodeRED.org")
+
 * [w3Schools](https://www.w3schools.com/ "w3schools.com")
 
 
@@ -32,8 +40,11 @@ Some good outside sources:
 [groov EPIC Training Series](https://training.opto22.com/series/groov-epic-training-series, "training.opto22")
 
 * [Initializing groov EPIC](https://training.opto22.com/series/groov-epic-training-series/maintenance-course "training.opto22.com")
+
 * [Maintenance - Backup, Restore, Update](https://training.opto22.com/series/groov-epic-training-series/maintenance-backup-restore-update-1, "training.opto22")
+
 * [System - Display (calibration, external monitor, mouse & keyboard)](https://training.opto22.com/series/groov-epic-training-series/system-display, "training.opto22")
+
 * [Reset to Factory Defaults (video)](https://training.opto22.com/hardware-resetting-to-factory-defaults/211962, "training.opto22")
 
 
@@ -90,9 +101,45 @@ Here are a few tasks and associated commands for working from the command line:
     They both have a higher learning curve than nano, but may be worth using because they have syntax highlighting for most popular languages such as: C++, Python, Java, Javascript, and even Markdown.
 
 * GitHub:<br>
-    <p>On the topic of managing files and folder structures, many developers choose to manage their source code with GitHub repositories.<br>
-    GitHub is a web-based version control service primarily used for computer code, and is extremely popular due to the way it handles branching of features to develop code without damaging the 'master' release branch. Using GitHub, multiple people can be working on different branches —or contributing to the same branch— then compare their local versions, to the master, and safely merge all the features together, handling conflicts if and when they arse, all while being able to review and restore all previous versions and changes.</p>
-    GitHub not only handles version control but also is a way to have your data backed up in case anything happens to your device. It is recommended to have major programs backed up in three places: an on-site backup, an off-site backup, and a secure (physically isolated or password protected) backup.
+    
+    <p>On the topic of managing files and folder structures, many developers choose to manage their source code with GitHub repositories (repos).<br>
+    GitHub is a web-based version control service primarily used for computer code, and is extremely popular due to the way it handles branching of features to develop code without damaging the 'master' release branch. Using GitHub, multiple people can be working on different branches —or contributing to the same branch— then compare their local versions, to the master, and safely merge all the features together, handling conflicts if and when they arse, all while being able to review and restore all previous versions and changes.<br>
+    GitHub not only provides an easy way to share code and manage versions, it also provides a reliable way to have your data backed up in case anything happens to your device.</p>
+
+    <details><summary>Useful Git Commands</summary>
+    
+    * `git` - **git** is the main command used to manage git repositories:
+
+        * `git init` - This command makes the current folder a GitHub repository.
+
+        * `git clone <repo>` - Creates a local repository in a new folder, cloned from `repo`.
+
+        * `git add <file>` - Tells GitHub to 'stage' this file in the repo, ready to be added.
+
+        * `git commit -m <message>` - Commits all staged changes to the local repository.
+
+        * `git push -u <source> <destination>` - Updates the `destination` repo with changes commited to the `source` repo.<br>
+        For example, to push local changes up to the master branch use `git push -u origin master`.
+
+        * `git pull` - Updates the local repo with any difference between it and the head of the current branch.<br>
+        This command is essentially two commands called in sequence, but they can be called separately as well:
+
+            * `git fetch` - Gets updates for the local repo without applying them, useful to check differences.
+
+            * `git merge` - Applies fetched differences to the local repo.
+
+        * `git branch` - Lists all branches of the current folder's associated repository.
+
+        * `git branch <name>` - Creates a new remote branch titled `name`, taking refs from the current repo.
+
+        * `git ls-remote` - Lists all remote branches, including those not on the device.
+
+        * `git checkout <branch>` - Makes `branch` the current working branch. By default, the main branch is `master`.
+        
+        * `git checkout --track <remote>/<branch>` - Adds a new local branch at this `remote` to track the given `branch`.<br>
+        For example; `git checkout --track origin/distantBranch`
+        
+        </details>
 
 [Top](#Top)
 
