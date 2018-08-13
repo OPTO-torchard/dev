@@ -107,7 +107,7 @@ Here are a few tasks and associated commands for working from the command line:
 * GitHub:<br>
     
     <p>On the topic of managing files and folder structures, many developers choose to manage their source code with GitHub repositories (repos).<br>
-    GitHub is a web-based version control service primarily used for computer code, and is extremely popular due to the way it handles branching of features to develop code without damaging the 'master' release branch. Using GitHub, multiple people can be working on different branches —or contributing to the same branch— then compare their local versions, to the master, and safely merge all the features together, handling conflicts if and when they arse, all while being able to review and restore all previous versions and changes.<br>
+    GitHub is a web-based version control service primarily used for computer code, and is extremely popular due to the way it handles branching of features to develop code without damaging the 'master' release branch. Using GitHub, multiple people can be working on different branches —or contributing to the same branch— then compare their local versions, to the master, and safely merge all the features together, handling version discrepancies if and when they arise, all while being able to review and restore all previous versions and changes.<br>
     GitHub not only provides an easy way to share code and manage versions, it also provides a reliable way to have your data backed up in case anything happens to your device.</p>
 
 <details><summary>Useful Git Commands</summary>
@@ -144,6 +144,7 @@ This command is essentially two commands called in sequence, but they can be cal
 For example; `git checkout --track origin/distantBranch`
 
 </details>
+<br>
 
 [Top](#Top)
 
@@ -165,7 +166,7 @@ You can make RESTful requests either on the device (localhost) or from elsewhere
 
 If you want to execute RESTful programs to make requests from the EPIC processor itself you will need a shell license -- but you do not need one to RESTfully access the data from another device.
 
-
+For basic REST API usage, you may want to check out our video on [How to Get & Post RESTful API Requests](https://www.youtube.com/watch?v=ypqiYtA6VtY& "OptoVideo") with the groov Edge Appliance and SNAP PAC Learning Center. Specifics on using the REST API 
 
 [Top](#Top)
 
