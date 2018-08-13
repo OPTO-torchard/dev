@@ -5,7 +5,7 @@
 ## Ignition EDGE
 
 Software developed by Inductive Automation.<br>
-Built-in drivers to other PLCs: Allen-Bradle, Seimens, Modbus, SNAP PAC, and groov EPIC compatibility.<br>
+Built-in drivers to other PLCs: Allen-Bradley, Siemens, Modbus, SNAP PAC, and _groov_ EPIC compatibility.<br>
 Cirus Link MQTT Sparkplug specification.<br>
 
 ### OPC-UA
@@ -137,7 +137,7 @@ CXXFLAGS = -I$(SRC_DIR) -Wall -D_LINUX -g
 LIB_SOURCES=$(wildcard Source/*.cpp)
 LIB_OBJECTS=$(patsubst %.cpp,%.o,${LIB_SOURCES})
 
-all: build Output/liboptommp.a pulse
+all: build Output/liboptommp.a test
 
 build:
         @mkdir -p Output
@@ -148,10 +148,10 @@ Output/liboptommp.a: ${LIB_OBJECTS}
 
 clean:
         rm -rf Output ${LIB_OBJECTS}
-        ${MAKE} -C Source/Examples/C++/pulse clean
+        ${MAKE} -C Source/Examples/C++/test clean
 
-pulse:
-        ${MAKE} -C Source/Examples/C++/pulse
+test:
+        ${MAKE} -C Source/Examples/C++/test
 
 Source/O22SIOMM.o: Source/O22SIOMM.cpp Source/O22SIOMM.h Source/O22SIOUT.h Source/O22STRCT.h
 
@@ -165,19 +165,24 @@ Source/O22SIOUT.o: Source/O22SIOUT.cpp Source/O22SIOUT.h
 <details><summary>Details for step `7`, the project Makefile:</summary>
 
 ```
-CXXFLAGS = -I../../../../Source -Wall -D_LINUX -g
+TOP_DIR=../../../..
+SOURCE_DIR=$(TOP_DIR)/Source
+OUTPUT_DIR=$(TOP_DIR)/Output
+
+CXXFLAGS = -I$(SOURCE_DIR) -Wall -D_LINUX -g
 LDFLAGS = -pthread
 
-SOURCES=pulse.cpp
+SOURCES=test.cpp
 OBJECTS=$(patsubst %.cpp,%.o,${SOURCES})
 
-all: ../../../../Output/pulse
+all: $(OUTPUT_DIR)/test
 
-../../../../Output/pulse: ../../../../Output/liboptommp.a ${OBJECTS}
-        $(CXX) $(LDFLAGS) -o $@ ${OBJECTS} ../../../../Output/liboptommp.a
+$(OUTPUT_DIR)/test: $(OUTPUT_DIR)/liboptommp.a ${OBJECTS}
+        $(CXX) $(LDFLAGS) -o $@ ${OBJECTS} $(OUTPUT_DIR)/liboptommp.a
 
 clean:
-        rm -f *.o ../../../../Output/pulse
+        rm -f *.o $(OUTPUT_DIR)/test
+
 ```
 
 </details>
@@ -185,52 +190,24 @@ clean:
 <details><summary>Details for step `8`, example C++ source code:</summary>
 
 ~~~ C++
-#include <stdlib.h>
-#include <stdio.h>
-#include <ctype.h>
-#include <string>
-#ifndef _WINSOCK_DEPRECATED_NO_WARNINGS
-#define _WINSOCK_DEPRECATED_NO_WARNINGS
-#endif
 #include "O22SIOMM.h"
 #include "O22STRCT.h"
-
-int main(int nArgs, char *pcharyArgs[])
-{
-        O22SnapIoMemMap objEpic;
+int main() {
         char *address = "127.0.0.1";
-        const int modN = 0;
-        const int ptN = 8;
-        int nResult;
+        const int module = 0;
+        const int point = 8;
 
-        // open a TCP connection
-        nResult = objEpic.OpenEnet2(address, 2001, 10000, 1, SIOMM_TCP);
-        if (nResult != SIOMM_OK) {
-                printf("OpenEnet2 reports result %d, exiting.\n", nResult);
-                exit(0);
-        }
-
-        // wait for the TCP connect to complete, not necessary for UDP
-        usleep(100000);
-
-        //      pulse the point 22 times:
+        O22SnapIoMemMap dev_EPIC;
+        dev_EPIC.OpenEnet2(address, 2001, 10000, 1, SIOMM_TCP);
         for(int i = 0; i < 22; i++) {
-                nResult = objEpic.SetHDDigitalPointState(modN, ptN, 1);
-                if (nResult != SIOMM_OK) {      // turn the point on
-                        printf("Set digital point ON reports %d. Exiting.\n", nResult);
-                        exit(0);
-                }
+                dev_EPIC.SetHDDigitalPointState(module, point, 1);
                 usleep(250000);
-                nResult = objEpic.SetHDDigitalPointState(modN,ptN, 0);
-                if (nResult != SIOMM_OK) {      // turn the point off
-                        printf("Set digital point OFF reports %d. Exiting.\n", nResult);
-                        exit(0);
-                }
+                dev_EPIC.SetHDDigitalPointState(module, point, 0);
                 usleep(250000);
         }
-
         return 0;
 }
+
 ~~~
 
 </details>
