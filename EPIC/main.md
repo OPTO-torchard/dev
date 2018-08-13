@@ -62,6 +62,8 @@ Experience developing applications from a Unix system command line is extremely 
 
 Here are a few tasks and associated commands for working from the command line:
 
+<details><summary>Useful Linux commands</summary>
+
 * Navigating
 
     * `pwd` - **print** working directory; Output the full path to the current folder.
@@ -93,6 +95,8 @@ Here are a few tasks and associated commands for working from the command line:
 
     * `*` - **wildcard**; matches all files in the current directory, or if used mid-file, for example; `rm o*.txt` will delete all text files that begin with the letter 'o'.
 
+</details>
+
 * Editing files
 
     * `nano <file>` - **nano** is a simple command line editor, similar to Notepad it has basic features.
@@ -106,40 +110,40 @@ Here are a few tasks and associated commands for working from the command line:
     GitHub is a web-based version control service primarily used for computer code, and is extremely popular due to the way it handles branching of features to develop code without damaging the 'master' release branch. Using GitHub, multiple people can be working on different branches —or contributing to the same branch— then compare their local versions, to the master, and safely merge all the features together, handling conflicts if and when they arse, all while being able to review and restore all previous versions and changes.<br>
     GitHub not only provides an easy way to share code and manage versions, it also provides a reliable way to have your data backed up in case anything happens to your device.</p>
 
-    <details><summary>Useful Git Commands</summary>
-    
-    * `git` - **git** is the main command used to manage git repositories:
+<details><summary>Useful Git Commands</summary>
 
-        * `git init` - This command makes the current folder a GitHub repository.
+* `git` - **git** is the main command used to manage git repositories:
 
-        * `git clone <repo>` - Creates a local repository in a new folder, cloned from `repo`.
+* `git init` - This command makes the current folder a GitHub repository.
 
-        * `git add <file>` - Tells GitHub to 'stage' this file in the repo, ready to be added.
+* `git clone <repo>` - Creates a local repository in a new folder, cloned from `repo`.
 
-        * `git commit -m <message>` - Commits all staged changes to the local repository.
+* `git add <file>` - Tells GitHub to 'stage' this file in the repo, ready to be added.
 
-        * `git push -u <source> <destination>` - Updates the `destination` repo with changes commited to the `source` repo.<br>
-        For example, to push local changes up to the master branch use `git push -u origin master`.
+* `git commit -m <message>` - Commits all staged changes to the local repository.
 
-        * `git pull` - Updates the local repo with any difference between it and the head of the current branch.<br>
-        This command is essentially two commands called in sequence, but they can be called separately as well:
+* `git push -u <source> <destination>` - Updates the `destination` repo with changes commited to the `source` repo.<br>
+For example, to push local changes up to the master branch use `git push -u origin master`.
 
-            * `git fetch` - Gets updates for the local repo without applying them, useful to check differences.
+* `git pull` - Updates the local repo with any difference between it and the head of the current branch.<br>
+This command is essentially two commands called in sequence, but they can be called separately as well:
 
-            * `git merge` - Applies fetched differences to the local repo.
+    * `git fetch` - Gets updates for the local repo without applying them, useful to check differences.
 
-        * `git branch` - Lists all branches of the current folder's associated repository.
+    * `git merge` - Applies fetched differences to the local repo.
 
-        * `git branch <name>` - Creates a new remote branch titled `name`, taking refs from the current repo.
+* `git branch` - Lists all branches of the current folder's associated repository.
 
-        * `git ls-remote` - Lists all remote branches, including those not on the device.
+* `git branch <name>` - Creates a new remote branch titled `name`, taking refs from the current repo.
 
-        * `git checkout <branch>` - Makes `branch` the current working branch. By default, the main branch is `master`.
-        
-        * `git checkout --track <remote>/<branch>` - Adds a new local branch at this `remote` to track the given `branch`.<br>
-        For example; `git checkout --track origin/distantBranch`
-        
-        </details>
+* `git ls-remote` - Lists all remote branches, including those not on the device.
+
+* `git checkout <branch>` - Makes `branch` the current working branch. By default, the main branch is `master`.
+
+* `git checkout --track <remote>/<branch>` - Adds a new local branch at this `remote` to track the given `branch`.<br>
+For example; `git checkout --track origin/distantBranch`
+
+</details>
 
 [Top](#Top)
 
@@ -147,7 +151,7 @@ Here are a few tasks and associated commands for working from the command line:
 
 ## _groov_ Manage, _groov_ View, and PAC Control
 
-> ...
+> ... Link outside resources(?)
 
 [Top](#Top)
 
@@ -160,6 +164,7 @@ Representational State Transfer (REST)
 You can make RESTful requests either on the device (localhost) or from elsewhere on the network, all you need is a request interface (a web browser or cUrl work too), the IP or hostname of your device, and of course the request URL and authentication key. The [_groov_ View REST API](http://developer.opto22.com/groov/view/ "Getting Started (developer.opto22.com)") and [_groov_ Manage REST API](http://developer.opto22.com/groov/manage/ "Getting Started (developer.opto22.com)") both support get and put/post requests, so it's possible to both read tags and I/O as well as write over tags and control outputs, depending on your application. The details of the request URL to access _groov_ View tags are in the [_groov_ View REST API Reference](http://developer.opto22.com/static/generated/groov-rest-api/swagger-ui/index.html?url=/static/generated/groov-rest-api/swagger.yaml "Swagger UI"), and _groov_ EPIC I/O requests are detailed in the  [_groov_ Manage REST API Reference](http://developer.opto22.com/static/generated/manage-rest-api/swagger-ui/index.html "Swagger UI")
 
 If you want to execute RESTful programs to make requests from the EPIC processor itself you will need a shell license -- but you do not need one to RESTfully access the data from another device.
+
 
 
 [Top](#Top)
