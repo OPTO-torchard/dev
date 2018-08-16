@@ -1,47 +1,38 @@
-## use: >> python eWrite.py <#> <#> <1|0>
-##      <#> first argument = module number
-##      <#> second argument = channel number
-##      1|0 third arguement = write value (1 OR 0)
+###    writeModChVal.py >>python writeModChVal.py <module #> <channel #> <1|0>
 import sys
 import socket
 import struct
 
-host = '127.0.0.1' # localhost when ran from groov controller command line
+host = '127.0.0.1' # groov EPIC IP
 
-port = 2001 #MMP default port: 2001
+port = 2001 # default OptoMMP port number
 tcode = 1   # write block request
-modN = int(sys.argv[1]) # first argument / parameter
-chN = int(sys.argv[2])  # second argument / parameter
-val = int(sys.argv[3])  # third argument / parameter
+modN = int(sys.argv[1]) # first argument
+chN = int(sys.argv[2])  # second argument
+val = int(sys.argv[3])  # third argument
 
-##create and connect to the socket at host:port
+# create socket with IPv4 family, and TCP
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# use that socket connect to host:port tuple
 s.connect((host, port))
-
-##Calculate the destination offset:
+# Calculate the destination offset:
+# EPIC digital write start address = 0xF0220000
 dest = 0xF0220000 + (modN * 0x1000) + (chN * 0x40)
+# build the write block request: 
+myBytes = [0, 0, (1 << 2), (tcode << 4), 0, 0, 255, 255, int(str(hex(dest))[2:4],16), int(str(hex(dest))[4:6],16), int(str(hex(dest))[6:8],16), int(str(hex(dest))[8:10],16), 0,16,  0,0,  0,0,0,val];
 
-tc = tcode << 4
-##build the block request: 
-##  [_,_, tlabel_, tc_, src,src, Dest,Dest,   D.4,D.3,D.2,D.1,   len,len, ext.tc,ext.tc]
-myBytes = [0, 0, 1, tc, 0, 0, 255, 255, int(str(hex(dest))[2:4],16), int(str(hex(dest))[4:6],16), int(str(hex(dest))[6:8],16), int(str(hex(dest))[8:10],16), 0,16,  0,0,  0,0,0,val];
+# send the write block request and save the response:
+nSent = s.send(bytearray(myBytes)) # want nSent to be exactly 16 bytes
+data = s.recv(12) # write block response is 12 bytes
+data_block = data[4:8] # data_block is in bytes 4-7 for Write Response, stop at 8.
 
-##send the block request and save the response:
-nSent = s.send(bytearray(myBytes))
-data = s.recv(12)
-
-##upper and lower range of the data block in the package:
-up = 8
-lo = 4
-
-#Big Endian reordering of the returned bytes:
-retBytes = []
-for i in range(up-lo):
-    retBytes.append(data[up-1-i])
-result = str(struct.unpack_from('i', bytearray(retBytes)))
-if (int(result[1:-2]) == 0):
-    print 'Write success ' + result[1:-2]
+# decode bytearray in big-endian order(>) for integer value (i)
+output = str(struct.unpack_from('>i', bytearray(data_block)))
+# clip out first `(` and last two characters `,)` to get the status code number
+status = int(output[1:-2])
+if (status == 0):
+    print 'Write success ' + str(status)
 else:
-    print 'Write failure ' + result[1:-2]
+    print 'Write failure ' + str(status)
 #close the socket:
 s.close()
