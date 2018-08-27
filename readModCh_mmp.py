@@ -19,7 +19,7 @@ s.connect((host, port))
 dest = 0xF01E0000 + (modN * 0x1000) + (chN * 0x40)
 # build the read block request:
 myBytes = [0, 0, (1 << 2), (tcode << 4), 0, 0, 255, 255, int(str(hex(dest))[2:4],16), int(str(hex(dest))[4:6],16), int(str(hex(dest))[6:8],16), int(str(hex(dest))[8:10],16), 0, 4, 0, 0];
-
+print myBytes
 # send the read block request and save the response:
 nSent = s.send(bytearray(myBytes)) # want nSent to be exactly 16 bytes
 data = s.recv(20) # read block response is 16 + 4 bytes
