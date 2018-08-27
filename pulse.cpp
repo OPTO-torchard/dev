@@ -4,8 +4,8 @@
 int main() {
 	const char *address = "127.0.0.1";
 	const int module = 0;
-	const int point = 8;
-
+	const int point = 22;
+	
 	O22SnapIoMemMap demo_EPIC;
 	// open a TCP connection to the host at 'address' port 2001
 	int nResult = demo_EPIC.OpenEnet2(address, 2001, 10000, 1, SIOMM_TCP);
