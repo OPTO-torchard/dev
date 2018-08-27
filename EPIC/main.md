@@ -166,7 +166,7 @@ You can make RESTful requests either on the device (localhost) or from elsewhere
 
 If you want to execute RESTful programs to make requests from the EPIC processor itself you will need a shell license -- but you do not need one to RESTfully access the data from another device.
 
-For basic REST API usage, you may want to check out our video on [How to Get & Post RESTful API Requests](https://www.youtube.com/watch?v=ypqiYtA6VtY& "OptoVideo") with the groov Edge Appliance and SNAP PAC Learning Center. Specifics on using the REST API 
+For basic REST API usage, you may want to check out our video on [How to Get & Post RESTful API Requests](https://www.youtube.com/watch?v=ypqiYtA6VtY& "OptoVideo") with the groov Edge Appliance and SNAP PAC Learning Center. Specifics on using the REST API with EPIC are covered in the [_groov_ Manage REST API documentation](http://developer.opto22.com/groov/manage/ "developer.opto22"), which can also be used through a browser, cUrl, application such as Postman, and languages like [Python](http://forums.opto22.com/t/epic-data-using-restful-python/2038 "forums.opto22").
 
 [Top](#Top)
 
