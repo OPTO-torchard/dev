@@ -2,12 +2,16 @@
 
 <a name="Top"></a>
 
-From PAC control and _groov_ View to the REST API and OptoMMP, there's no shortage of ways to access the data on your Edge Programmable Industrial Controller, it's just a matter of which method to get what data, and how.<br>
-Your specific application and experience level largely determine your development path, where most applications are best handled using PAC control flows for control and groov view pages for monitoring. If you are adding to existing architecture or already have experience in another language, however, you may find the Opto Memory-Mapped protocol or RESTful API is more appropriate for you, although working with them often requires accessing the device command line through secure shell or SSH.
+From PAC control and _groov_ View to the REST API and OptoMMP, there's no shortage of ways to access the data on your Edge Programmable Industrial Controller, it's just a matter of which method to get what data, and how to apply that method.<br>
+Your specific application and experience level will largely determine your development method, where most applications are best handled using PAC control flows for control and groov view pages for monitoring. If you are adding to existing architecture or already have experience in another language, however, you may find that the Opto Memory-Mapped protocol or RESTful API is more appropriate for you, although working with them often requires accessing the device command line through secure shell or SSH.
 
 ## Secure Shell (SSH)
 
+A shell license is required to use SSH, you can get one from [Opto 22](https://www.opto22.com/ "opto22.com")
 
+* Opto 22 Training: [Downloading and Running Custom Programs](https://training.opto22.com/series/groov-epic-training-series/downloading-and-running-custom-programs/196374 "training.opto22")<br>
+
+>
 
 [Top](#Top)
 
@@ -71,7 +75,6 @@ Some good outside sources:
 * [System - Display (calibration, external monitor, mouse & keyboard)](https://training.opto22.com/series/groov-epic-training-series/system-display, "training.opto22")
 
 * [Reset to Factory Defaults (video)](https://training.opto22.com/hardware-resetting-to-factory-defaults/211962, "training.opto22")
-
 
 
 [Top](#Top)

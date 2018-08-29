@@ -47,185 +47,95 @@ It is both the runtime and editor, ultimately compiling to Javascript. Of partic
 
 -----
 
-## REST API
+## LINUX
 
->
+The _groov_ EPIC processor runs a custom build of [Yocto](https://www.yoctoproject.org "Yocto Project") Linux as it's operating system, this is what you will be interacting with over SSH.<br>
+Experience developing applications from a Unix system command line is extremely helpful here, since there is no traditional user interface (UI) to interact with the operating system, only the _groov_ Manage and _groov_ View interfaces.
 
-[Top](#Top)
+Here are a few tasks and associated commands for working from the command line:
 
------
+<details><summary>Useful Linux commands</summary>
 
-## Python for REST API
+* Navigating
 
-To make RESTful requests with Python requests you need to:
+    * `pwd` - **print** working directory; Output the full path to the current folder.
 
-1. `sudo apt-get update`
+    * `ls` - **list**; Output a list of all files in the current folder.
 
-    Do **NOT** apt-get upgrade!
-2. `sudo apt-get install python-pip`
+        * `ls -a` - **list all**; Output list will also include hidden files.
 
-    Do **NOT** upgrade pip individually either!
-3. `sudo pip install requests`
+        * `ls -l` - **list long**; Output full details of the files.
 
-4. `import requests`
+        * `ls -la` - Use multiple flags to combine their functionality. For example; to display all files and their details.
 
-    Import the library to your script once it is installed
+    * `cd <dir>` - **change directory**; Jump from the current directory to `dir`.<br>
+    You can give partial and full paths here, so you don't have to jump every single folder individually.<br>
+    Use `..` to go up on folder, `../..` to go up two, and so on.
 
-* Forum: [EPIC data using RESTful Python](http://forums.opto22.com/t/epic-data-using-restful-python/2038 "OptoForums")
+* Managing files
 
-* Developer: [groov Manage REST API](http://developer.opto22.com/groov/manage/ "developer.opto22.com")
+    * `touch <file>` - **touch**; Creates `file` if it does not exist, and updates the modification time if it does.
 
-[Top](#Top)
+    * `mv <file> <dest>` - **move**; Moves `file` to `dest`, where `dest` can be a single folder or full path.<br>
+        Use this to rename files by putting just the name and no path in `dest`.
 
-## Python for OptoMMP
+    * `cp <file> <dest>` - **copy**; Copies `file` to `dest`, where the destination can be used to rename the copy.
 
->
+    * `rm <file>` - **remove**; Deletes `file` from the current directory, or you can include a full path.
 
-* Forum: [EPIC data using OptoMMP with Python](http://forums.opto22.com/t/epic-data-using-optommp-with-python/2041 "OptoForums")
+        * `rm -rf <dir>` - **remove folder**; The addition of the `-rf` flag allows for the removal of entire folders.
 
-* Developer: [Getting Started with OptoMMP for Python](http://developer.opto22.com/pythonmmp/ "developer.opto22.com")
-
-* [OptoMMP Protocol Guide](https://www.opto22.com/support/resources-tools/documents/1465-optommp-protocol-guide) (form 1465)
-
-[Top](#Top)
-
------
-
-## C++ for OptoMMP
-
-1. Create a new development folder and navigate there.
-
-    `mkdir OptoMMP_CPP`<br>
-    `cd OptoMMP_CPP`
-2. Download the [C++ SDK from Opto 22](https://www.opto22.com/products/pac-dev-optommp-cplus "PAC-DEV-OPTOMMP-CPLUS"). Right click zip download link, copy link location to clipboard, and then use `wget` to download.
-
-    `wget http://downloads.opto22.com/PAC-DEV-OPTOMMP-CPLUS%20R4.0a-002.zip`
-3. Unzip the archive. Use the `tab` key to autocomplete your filename, or make sure you type in the exact release you have.
-
-    `unzip PAC-DEV-OPTOMMP-CPLUS%20R4.0a-002.zip`
-4. Create a new master Makefile to compile your source code with the required libraries.<br>
-    Detailed contents of this master Makefile are described below.
-
-5. Navigate to the source folder.
-
-    `cd Source`
-6. Create a new project source folder and navigate there.
-
-    `mkdir Project`<br>
-    `cd Project`
-7. Create a new project Makefile, edit it using `nano` or `vim`.<br>
-    Detailed contents of this project Makefile are described below.
-
-    `touch Makefile`
-8. Create or import your C++ source code file. An example is provided below.
-
-    `touch project.cpp`
-9. Leave the project folder, then compile the libraries required and make the project executable in `/Output`
-
-    `cd ..`<br>
-    `make`
-10. Navigate to and run the executable, provided there were no compiler errors.
-
-    `cd Output`<br>
-    `./project`
-
-<details><summary>Details for step `4`, the master Makefile:</summary>
-
-```
-CXXFLAGS = -I$(SRC_DIR) -Wall -D_LINUX -g
-
-LIB_SOURCES=$(wildcard Source/*.cpp)
-LIB_OBJECTS=$(patsubst %.cpp,%.o,${LIB_SOURCES})
-
-all: build Output/liboptommp.a test
-
-build:
-        @mkdir -p Output
-
-Output/liboptommp.a: ${LIB_OBJECTS}
-        ar rcs $@ ${LIB_OBJECTS}
-        ranlib $@
-
-clean:
-        rm -rf Output ${LIB_OBJECTS}
-        ${MAKE} -C Source/Examples/C++/test clean
-
-test:
-        ${MAKE} -C Source/Examples/C++/test
-
-Source/O22SIOMM.o: Source/O22SIOMM.cpp Source/O22SIOMM.h Source/O22SIOUT.h Source/O22STRCT.h
-
-Source/O22SIOST.o: Source/O22SIOST.cpp Source/O22SIOST.h Source/O22SIOUT.h Source/O22STRCT.h
-
-Source/O22SIOUT.o: Source/O22SIOUT.cpp Source/O22SIOUT.h
-```
+    * `*` - **wildcard**; matches all files in the current directory, or if used mid-file, for example; `rm o*.txt` will delete all text files that begin with the letter 'o'.
 
 </details>
 
-<details><summary>Details for step `7`, the project Makefile:</summary>
+* Editing files
 
-```
-TOP_DIR=../../../..
-SOURCE_DIR=$(TOP_DIR)/Source
-OUTPUT_DIR=$(TOP_DIR)/Output
+    * `nano <file>` - **nano** is a simple command line editor, similar to Notepad it has basic features.
 
-CXXFLAGS = -I$(SOURCE_DIR) -Wall -D_LINUX -g
-LDFLAGS = -pthread
+    * `vim <files>` - **vim** is "**vi** i**m**proved", where vi is a Unix text editor.<br>
+    They both have a higher learning curve than nano, but may be worth using because they have syntax highlighting for most popular languages such as: C++, Python, Java, Javascript, and even Markdown.
 
-SOURCES=test.cpp
-OBJECTS=$(patsubst %.cpp,%.o,${SOURCES})
+* GitHub:<br>
+    
+    <p>On the topic of managing files and folder structures, many developers choose to manage their source code with GitHub repositories (repos).<br>
+    GitHub is a web-based version control service primarily used for computer code, and is extremely popular due to the way it handles branching of features to develop code without damaging the 'master' release branch. Using GitHub, multiple people can be working on different branches —or contributing to the same branch— then compare their local versions, to the master, and safely merge all the features together, handling version discrepancies if and when they arise, all while being able to review and restore all previous versions and changes.<br>
+    GitHub not only provides an easy way to share code and manage versions, it also provides a reliable way to have your data backed up in case anything happens to your device.</p>
 
-all: $(OUTPUT_DIR)/test
+<details><summary>Useful Git Commands</summary>
 
-$(OUTPUT_DIR)/test: $(OUTPUT_DIR)/liboptommp.a ${OBJECTS}
-        $(CXX) $(LDFLAGS) -o $@ ${OBJECTS} $(OUTPUT_DIR)/liboptommp.a
+* `git` - **git** is the main command used to manage git repositories:
 
-clean:
-        rm -f *.o $(OUTPUT_DIR)/test
+* `git init` - This command makes the current folder a GitHub repository.
 
-```
+* `git clone <repo>` - Creates a local repository in a new folder, cloned from `repo`.
 
-</details>
+* `git add <file>` - Tells GitHub to 'stage' this file in the repo, ready to be added.
 
-<details><summary>Details for step `8`, example C++ source code:</summary>
+* `git commit -m <message>` - Commits all staged changes to the local repository.
 
-~~~ C++
-#include "O22SIOMM.h"
-#include "O22STRCT.h"
-int main() {
-        char *address = "127.0.0.1";
-        const int module = 0;
-        const int point = 8;
+* `git push -u <source> <destination>` - Updates the `destination` repo with changes commited to the `source` repo.<br>
+For example, to push local changes up to the master branch use `git push -u origin master`.
 
-        O22SnapIoMemMap dev_EPIC;
-        dev_EPIC.OpenEnet2(address, 2001, 10000, 1, SIOMM_TCP);
-        for(int i = 0; i < 22; i++) {
-                dev_EPIC.SetHDDigitalPointState(module, point, 1);
-                usleep(250000);
-                dev_EPIC.SetHDDigitalPointState(module, point, 0);
-                usleep(250000);
-        }
-        return 0;
-}
+* `git pull` - Updates the local repo with any difference between it and the head of the current branch.<br>
+This command is essentially two commands called in sequence, but they can be called separately as well:
 
-~~~
+    * `git fetch` - Gets updates for the local repo without applying them, useful to check differences.
+
+    * `git merge` - Applies fetched differences to the local repo.
+
+* `git branch` - Lists all branches of the current folder's associated repository.
+
+* `git branch <name>` - Creates a new remote branch titled `name`, taking refs from the current repo.
+
+* `git ls-remote` - Lists all remote branches, including those not on the device.
+
+* `git checkout <branch>` - Makes `branch` the current working branch. By default, the main branch is `master`.
+
+* `git checkout --track <remote>/<branch>` - Adds a new local branch at this `remote` to track the given `branch`.<br>
+For example; `git checkout --track origin/distantBranch`
 
 </details>
-
 <br>
-
- * [C++ for OptoMMP](/cpp/)
-
-    * [SDK product page](https://www.opto22.com/products/pac-dev-optommp-cplus)
-
-    * [SDK download page](https://www.opto22.com/support/resources-tools/downloads/pac-dev-optommp-cpp)
-
-[Top](#Top)
-
------
-
-## Java
-
->
 
 [Top](#Top)
