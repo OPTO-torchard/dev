@@ -1,0 +1,3 @@
+### To run pulse.cpp executable...
+
+`sudo chmod +x pulse`
