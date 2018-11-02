@@ -1,8 +1,8 @@
-README for groov EPIC Secure Shell (SSH) Demo
+# README for groov EPIC Secure Shell (SSH) Demo
 
 ------------
 
-OptoMMP: Python Scripts
+## OptoMMP: Python Scripts
 
 The following Python scripts use OptoMMP thru the socket interface to communicate groov EPIC:
 
@@ -19,7 +19,7 @@ The following Python scripts use OptoMMP thru the socket interface to communicat
 
 --------
 
-OptoMMP: Executable file compiled from C++ code
+## OptoMMP: Executable file compiled from C++ code
 
 *"pulseprogram"* Flashes output 22 on module 0 twenty two times. Source code is pulseprogram.cpp, uses the OptoMMP C++ SDK.
 * `sudo chmod +x pulseprogram` to make the file executable,
