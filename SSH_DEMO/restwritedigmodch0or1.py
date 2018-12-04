@@ -4,9 +4,15 @@ import requests     # to make get/post requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 # head is a JSON object that holds API key information
-head = {    'apiKey' : 'hxxpVnboPSrpU5i8KrRkRQHfgxR5HSfr',
+head = {    'apiKey' : 'U5GE7wPNox8JkvtuXPiroo5fJDuGuYa9',
                     'Content-Type' : 'application/json' }
 host = 'localhost'
+
+if(len(sys.argv) != 4): # If the module, channel, and/or value are not provided.
+        print 'Please provide module #, channel #, and value [1|0].'
+        print 'Exiting script . . .'
+        exit() # Inform the user and exit the script.
+
 mod = sys.argv[1] # 1st argument = module number
 chn = sys.argv[2] # 2nd argument = channel number
 # 3rd argument = convert value to be written from 1/0 to true/false
