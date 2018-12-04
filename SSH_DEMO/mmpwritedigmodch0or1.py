@@ -5,6 +5,11 @@ import struct
 
 host = '127.0.0.1' # groov EPIC IP
 
+if(len(sys.argv) != 4): # If the module, channel, and/or value are not provided.
+        print 'Please provide module #, channel #, and value [1|0].'
+        print 'Exiting script . . .'
+        exit() # Inform the user and exit the script.
+
 port = 2001 # default OptoMMP port number
 tcode = 1   # write block request
 modN = int(sys.argv[1]) # first argument
